@@ -3,14 +3,27 @@ import {SafeAreaView, View, Text, Pressable, Image, StatusBar} from "react-nativ
 
 const MainScreen = ({navigation}) => {
 
+  const [selectColor, setSelectColor] = React.useState("darkblue")
+
   const solveChooseColor = () => {
-    navigation.navigate("ChooseColor")
+    navigation.push("ChooseColor", {color: selectColor, setSelectColor: setSelectColor})
+  }
+
+  const getColor = (color) => {
+    if (color == "skyblue")
+      return require("./assets/silver.png")
+    else if (color == "red")
+      return require("./assets/red.png")
+    else if (color == "black")
+      return require("./assets/black.png")
+    else if (color == "darkblue")
+      return require("./assets/blue.png")
   }
 
   return <SafeAreaView style={{width: "100%", height: "100%", display: "flex", justifyContent: "space-between", alignItems: "center"}}>
     <View style={{width: "90%"}}>
       <View>
-        <Image source={require("./assets/blue.png")} style={{height: 326, width: 326}}/>
+        <Image source={getColor(selectColor)} style={{height: 326, width: 326}}/>
       </View>
       <View style={{display: "flex", flexDirection: "column", marginTop: 10}}>
         <View>
